@@ -1,18 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("comments");
-    const display = document.getElementById("comment-display");
-    const button = document.getElementById("submit-comment");
+document.addEventListener("DOMContentLoaded", () => {
+    const submitBtn = document.getElementById("submit-comment");
+    const inputField = document.getElementById("comments");
+    const commentDisplay = document.getElementById("comment-display");
 
-    button.addEventListener("click", function () {
-        const comment = input.value.trim();
+    submitBtn.addEventListener("click", () => {
+        const comment = inputField.value.trim();
 
-        if (comment.length < 3) {
-            display.textContent = "Please write a bit more — at least 3 characters.";
-            display.style.color = "orange";
-        } else {
-            display.textContent = `"${comment}" — nice thought!`;
-            display.style.color = "#00ffd0";
-            input.value = "";
+        if (comment === "") {
+            alert("Please enter a comment before submitting.");
+            return;
         }
+
+        const commentElement = document.createElement("p");
+        commentElement.textContent = comment;
+        commentElement.classList.add("comment-message");
+
+        commentDisplay.appendChild(commentElement);
+        inputField.value = ""; // Clear input field after submission
     });
 });
